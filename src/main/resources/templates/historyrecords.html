@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My history detailed bills</title>
+</head>
+<body>
+Welcome <a th:text="${user.name}"></a>, the details of your bill <a th:text="${billid}"></a> are as follows.
+
+<table>
+    <thead>
+    <tr>
+        <th>InstrumentId</th>
+        <th>Name</th>
+        <th>Number</th>
+        <th>Review</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="record : ${records}">
+        <th scope="row" th:text="${record.instrumentid}"></th>
+        <td th:text="${record.instrumentname}"></td>
+        <td th:text="${record.number}"></td>
+        <td>
+            <a th:href="@{~/review/{userid}/{instrumentid}(userid=${user.id}, instrumentid=${record.instrumentid})}">评价一下</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<a th:href="@{~/history/{id}(id=${user.id})}">返回</a>
+
+</body>
+</html>

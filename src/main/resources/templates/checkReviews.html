@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Others' Reviews</title>
+</head>
+<body>
+<h1>用户评价</h1>
+
+<table>
+    <thead>
+    <tr>
+        <th>用户id</th>
+        <th>评价内容</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="review : ${reviews}">
+        <td th:text="${review.userid}"></td>
+        <td th:text="${review.comment}"></td>
+    </tr>
+    </tbody>
+</table>
+
+<a th:href="@{~/instruments/{id}(id=${instrumenid})}">确定</a>
+
+</body>
+</html>

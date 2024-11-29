@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My History Shopping Record</title>
+</head>
+<body>
+Welcome to your history shopping records, <a th:text="${user.name}"></a>
+
+<table>
+    <thead>
+    <tr>
+        <th>#</th>
+        <th>Amount(￥)</th>
+        <th>Weight(kg)</th>
+        <th>Details</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="bill : ${bills}">
+        <th scope="row" th:text="${bill.id}"></th>
+        <td th:text="${bill.amount}"></td>
+        <td th:text="${bill.weight}"></td>
+        <td>
+            <a th:href="@{~/history/{userid}/{billid}(userid=${user.id}, billid=${bill.id})}">详情</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<a th:href="@{~/instruments}">返回</a>
+
+</body>
+</html>

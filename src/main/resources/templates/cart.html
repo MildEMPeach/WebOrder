@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Shopping Cart</title>
+</head>
+<body>
+Welcome, <a th:text="${user.name}"></a>, this is your shopping cart!
+
+<table>
+    <thead>
+    <tr>
+        <th>InstrumentId</th>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Weight</th>
+        <th>Number</th>
+        <th>Delete</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="cart : ${carts}">
+        <th scope="row" th:text="${cart.instrumentid}"></th>
+        <td th:text="${cart.instrumentname}"></td>
+        <td th:text="${cart.price}"></td>
+        <td th:text="${cart.weight}"></td>
+        <td th:text="${cart.number}"></td>
+        <td>
+            <a th:href="@{~/deletecart/{userid}/{instrumentid}(userid=${user.id}, instrumentid=${cart.instrumentid})}">删除</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+当前总金额：<a th:text="${amount}"></a> 元<br>
+
+当前总质量: <a th:text="${weight}"></a> 千克<br>
+
+<a th:href="@{~/instruments}">继续购物</a><br>
+
+<a th:href="@{~/emptycart/{userid}(userid=${user.id})}">清空购物车</a><br>
+
+<a th:href="@{~/makebills/{userid}(userid=${user.id})}">提交订单</a><br>
+
+</body>
+</html>

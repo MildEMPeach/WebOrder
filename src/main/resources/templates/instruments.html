@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Instruments list</title>
+</head>
+<body>
+<h1>Instrument List</h1>
+<table>
+    <thead>
+    <tr>
+        <th>#</th>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Weight</th>
+        <th>Details</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="instrument : ${instruments}">
+        <th scope="row" th:text="${instrument.id}"></th>
+        <td th:text="${instrument.name}"></td>
+        <td th:text="${instrument.price}"></td>
+        <td th:text="${instrument.weight}"></td>
+        <td>
+            <a th:href="@{~/instruments/{id}(id=${instrument.id})}">Buy!</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<a th:href="@{~/cart/{id}(id=${user.id})}">Open My Shopping Cart</a><br>
+<a th:href="@{~/history/{id}(id=${user.id})}">订单历史记录</a><br>
+<a th:href="@{~/logout}">Log Out</a><br>
+
+</body>
+</html>
