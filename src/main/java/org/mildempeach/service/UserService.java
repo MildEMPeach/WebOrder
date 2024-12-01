@@ -22,10 +22,6 @@ public class UserService {
         return userMapper.getUserById(id);
     }
 
-    public User getUserByNameAndPassword(String username, String password) {
-        return userMapper.getUserByNameAndPassword(username, password);
-    }
-
     public void insertUser(String username, String password) {
         userMapper.insertUser(username, password);
     }

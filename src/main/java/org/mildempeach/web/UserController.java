@@ -62,6 +62,8 @@ public class UserController {
 
     @GetMapping("/logout")
     public String logout(HttpSession httpSession) {
+        User user = (User) httpSession.getAttribute("user");
+        cartService.deleteFromCart(user.getId());
         httpSession.removeAttribute("user");
         return "redirect:/";
     }
@@ -97,16 +99,12 @@ public class UserController {
             return "redirect:/";
         }
         Instrument instrument = instrumentService.getInstrumentById(id);
-        if (instrument == null) {
-            // todo: error
-            return "redirect:/";
-        }
         model.addAttribute("instrument", instrument);
         return "instrument";
     }
 
     @PostMapping("/instruments/{id}")
-    public String test(HttpServletRequest httpServletRequest, @PathVariable int id, HttpSession session) {
+    public String doInstrument(HttpServletRequest httpServletRequest, @PathVariable int id, HttpSession session) {
         int number = Integer.parseInt(httpServletRequest.getParameter("number"));
         Instrument instrument = instrumentService.getInstrumentById(id);
         User user = (User) session.getAttribute("user");
@@ -115,7 +113,7 @@ public class UserController {
     }
 
     @GetMapping("/cart/{id}")
-    public String cart(@PathVariable("id") int userid, HttpServletRequest httpServletRequest, Model model) {
+    public String cart(@PathVariable("id") int userid, Model model) {
         User user = userService.getUserById(userid);
         model.addAttribute("user", user);
         List<Cart> carts = cartService.getCartByUserId(userid);
@@ -222,7 +220,5 @@ public class UserController {
         model.addAttribute("instrumenid", instrumenid);
         return "checkReviews";
     }
-
-
 
 }
